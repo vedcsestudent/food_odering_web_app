@@ -22,7 +22,7 @@ authController.post("/register", async(req, res)=>
         
         const {password, ...others}= newUser._doc
 
-        const token= jwt.sign({id:newUser._id,isAdmin:newUser.isAdmin},process.env.JWT_Secret,{expiresIn:"5h"})
+        const token= jwt.sign({id:newUser._id,isAdmin:newUser.isAdmin},process.env.JWT_Secret)
         
         return res.status(201).json({others,token})
     }
@@ -49,7 +49,7 @@ authController.post("/login",async(req,res)=>
             throw new Error("Users Credentials are wrong");
         }
         const {password,...others}=user._doc
-        const token= jwt.sign({id:user._id, isAdmin:user.isAdmin},process.env.JWT_Secret, {expiresIn:"5h"})
+        const token= jwt.sign({id:user._id, isAdmin:user.isAdmin},process.env.JWT_Secret)
 
         return res.status(200).json({others, token})
 
